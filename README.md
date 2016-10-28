@@ -1,5 +1,5 @@
 # Inexinferis-FX
-This is the latest Inexinferis Fx rootkit originally started by Karman in elhacker.net about 2008/2009
+This is the latest Inexinferis Fx rootkit originally started by Karman in elhacker.net about 2008/2009.
 The Linux fork and the MultiOS update are made by me. The linux implementation is under development yet...
 
 
@@ -40,8 +40,8 @@ Pure OpenGL / WINAPI Cheat, VAC2 proof from the 19-11-2013 use under your own ri
 
 
 # Credits:
-for many people in the forums of the game-Deception (I don ' t remember names)
-www.inexinferis.com.ar
+for many people in the forums of the game-Deception (I don ' t remember names).
+www.inexinferis.com.ar 
 www.rompiendocodigo.net
 
 
