@@ -1,0 +1,46 @@
+# depslib dependency file v1.0
+1477082552 source:/home/bloodsharp/Documentos/Programacion/inexinferisfx/graphics.cpp
+	"graphics.h"
+
+1477081259 /home/bloodsharp/Documentos/Programacion/inexinferisfx/graphics.h
+	"inexinferis.h"
+
+1477082623 /home/bloodsharp/Documentos/Programacion/inexinferisfx/inexinferis.h
+	<SDL2/SDL.h>
+	<SDL2/SDL_opengl.h>
+	<GL/glu.h>
+	<cstdio>
+	<cmath>
+	<dlfcn.h>
+	"graphics.h"
+	"gui.h"
+
+1477082552 /home/bloodsharp/Documentos/Programacion/inexinferisfx/gui.h
+
+1477082552 source:/home/bloodsharp/Documentos/Programacion/inexinferisfx/gui.cpp
+	"inexinferis.h"
+
+1477528242 source:/home/bloodsharp/Documentos/Documentos/Programacion/inexinferisfx/graphics.cpp
+	"graphics.h"
+
+1477081259 /home/bloodsharp/Documentos/Documentos/Programacion/inexinferisfx/graphics.h
+	"inexinferis.h"
+
+1477532387 /home/bloodsharp/Documentos/Documentos/Programacion/inexinferisfx/inexinferis.h
+	<SDL2/SDL.h>
+	<SDL2/SDL_opengl.h>
+	<GL/glu.h>
+	<cstdio>
+	<cmath>
+	<dlfcn.h>
+	"graphics.h"
+	"gui.h"
+
+1477082552 /home/bloodsharp/Documentos/Documentos/Programacion/inexinferisfx/gui.h
+
+1477530044 source:/home/bloodsharp/Documentos/Documentos/Programacion/inexinferisfx/gui.cpp
+	"inexinferis.h"
+
+1477532364 source:/home/bloodsharp/Documentos/Documentos/Programacion/inexinferisfx/inexinferis.cpp
+	"inexinferis.h"
+
