@@ -74,8 +74,14 @@ void GuiHandleDraw()
 }
 
 //handle input functions
+#ifdef __cplusplus
+#define HOOKED_EXPORT extern "C" __attribute__ ((visibility ("default")))
+#else
+#define HOOKED_EXPORT __attribute__ ((visibility ("default")))
+#endif // __cplusplus
+
 typeof(SDL_PollEvent)*pSDL_PollEvent;
-DECLSPEC int SDLCALL SDL_PollEvent(SDL_Event*event)
+HOOKED_EXPORT int SDLCALL SDL_PollEvent(SDL_Event*event)
 {
     if(!pSDL_PollEvent)pSDL_PollEvent=(typeof(SDL_PollEvent)*)dlsym(RTLD_NEXT,"SDL_PollEvent");
 
