@@ -53,10 +53,8 @@ GLfloat GetDist(GLfloat firstX,GLfloat firstY,GLfloat firstZ,GLfloat secX,GLfloa
 }
 
 typeof(glBegin)*pglBegin=0;
-void GLAPIENTRY glBegin(GLenum mode)
+void GLAPIENTRY hglBegin(GLenum mode)
 {
-    if(!pglBegin)pglBegin=(typeof(glBegin)*)dlsym(RTLD_NEXT,"glBegin");
-
     float col[4];
     if(!cfg.bDisabled)
     {
@@ -137,10 +135,8 @@ void GLAPIENTRY glBegin(GLenum mode)
 }
 
 typeof(glClear)*pglClear=0;
-void GLAPIENTRY glClear(GLbitfield mask)
+void GLAPIENTRY hglClear(GLbitfield mask)
 {
-    if(!pglClear)pglClear=(typeof(glClear)*)dlsym(RTLD_NEXT,"glClear");
-
     if(!cfg.bDisabled&&mask==GL_DEPTH_BUFFER_BIT)
     {
         mask+=GL_COLOR_BUFFER_BIT;
@@ -150,20 +146,16 @@ void GLAPIENTRY glClear(GLbitfield mask)
 }
 
 typeof(glVertex2f)*pglVertex2f=0;
-void GLAPIENTRY glVertex2f(GLfloat x,GLfloat y)
+void GLAPIENTRY hglVertex2f(GLfloat x,GLfloat y)
 {
-    if(!pglVertex2f)pglVertex2f=(typeof(glVertex2f)*)dlsym(RTLD_NEXT,"glVertex2f");
-
     if(!cfg.bDisabled&&cfg.bNoFlash&&bFlash&&x==0.0&&y==0.0)
         glColor4f(1.0f,1.0f,1.0f,0.2f);
     pglVertex2f(x,y);
 }
 
 typeof(glVertex3fv)*pglVertex3fv=0;
-void GLAPIENTRY glVertex3fv(const GLfloat *v)
+void GLAPIENTRY hglVertex3fv(const GLfloat *v)
 {
-    if(!pglVertex3fv)pglVertex3fv=(typeof(glVertex3fv)*)dlsym(RTLD_NEXT,"glVertex3fv");
-
     if(!cfg.bDisabled)
     {
         if(cfg.bNoSmoke&&bSmoke)
@@ -176,10 +168,8 @@ void GLAPIENTRY glVertex3fv(const GLfloat *v)
 }
 
 typeof(glVertex3f)*pglVertex3f=0;
-void GLAPIENTRY glVertex3f(GLfloat x,GLfloat y,GLfloat z)
+void GLAPIENTRY hglVertex3f(GLfloat x,GLfloat y,GLfloat z)
 {
-    if(!pglVertex3f)pglVertex3f=(typeof(glVertex3f)*)dlsym(RTLD_NEXT,"glVertex3f");
-
     if(!cfg.bDisabled)
     {
         if(player.vertex==8)
@@ -258,10 +248,8 @@ void GLAPIENTRY glVertex3f(GLfloat x,GLfloat y,GLfloat z)
 }
 
 typeof(glShadeModel)*pglShadeModel=0;
-void GLAPIENTRY glShadeModel(GLenum mode)
+void GLAPIENTRY hglShadeModel(GLenum mode)
 {
-    if(!pglShadeModel)pglShadeModel=(typeof(glShadeModel)*)dlsym(RTLD_NEXT,"glShadeModel");
-
     GLdouble wx,wz,wy;
     if(!cfg.bDisabled)
     {
@@ -305,10 +293,8 @@ void GLAPIENTRY glShadeModel(GLenum mode)
 }
 
 typeof(glPushMatrix)*pglPushMatrix=0;
-void GLAPIENTRY glPushMatrix()
+void GLAPIENTRY hglPushMatrix()
 {
-    if(!pglPushMatrix)pglPushMatrix=(typeof(glPushMatrix)*)dlsym(RTLD_NEXT,"glPushMatrix");
-
     if(!cfg.bDisabled)
     {
         player.vertex=0;
@@ -318,20 +304,16 @@ void GLAPIENTRY glPushMatrix()
 }
 
 typeof(glPopMatrix)*pglPopMatrix=0;
-void GLAPIENTRY glPopMatrix()
+void GLAPIENTRY hglPopMatrix()
 {
-    if(!pglPopMatrix)pglPopMatrix=(typeof(glPopMatrix)*)dlsym(RTLD_NEXT,"glPopMatrix");
-
     if(!cfg.bDisabled&&model.get)
         model.get=0;
     pglPopMatrix();
 }
 
 typeof(glEnable)*pglEnable=0;
-void GLAPIENTRY glEnable(GLenum mode)
+void GLAPIENTRY hglEnable(GLenum mode)
 {
-    if(!pglEnable)pglEnable=(typeof(glEnable)*)dlsym(RTLD_NEXT,"glEnable");
-
     if(!cfg.bDisabled)
     {
         if(mode==GL_TEXTURE_2D)
@@ -347,19 +329,20 @@ void GLAPIENTRY glEnable(GLenum mode)
 }
 
 typeof(glDisable)*pglDisable=0;
-void GLAPIENTRY glDisable(GLenum mode)
+void GLAPIENTRY hglDisable(GLenum mode)
 {
-    if(!pglDisable)pglDisable=(typeof(glDisable)*)dlsym(RTLD_NEXT,"glDisable");
-
     if(!cfg.bDisabled&&mode==GL_TEXTURE_2D)
         bTex=0;
     pglDisable(mode);
 }
 
 typeof(glViewport)*pglViewport=0;
-void GLAPIENTRY glViewport(GLint x,GLint y,GLsizei width,GLsizei height)
+void GLAPIENTRY hglViewport(GLint x,GLint y,GLsizei width,GLsizei height)
 {
-    if(!pglViewport)pglViewport=(typeof(glViewport)*)dlsym(RTLD_NEXT,"glViewport"),LoadConfig();
+    static bool bOnce=false;
+    if(!bOnce)
+        LoadConfig(),
+        bOnce=true;
 
     bDrawn=1;//GUI
     if(!cfg.bDisabled)
@@ -389,10 +372,8 @@ void GLAPIENTRY glViewport(GLint x,GLint y,GLsizei width,GLsizei height)
 }
 
 typeof(glFrustum)*pglFrustum=0;
-void GLAPIENTRY glFrustum(GLdouble left,GLdouble right,GLdouble bottom,GLdouble top,GLdouble zNear,GLdouble zFar)
+void GLAPIENTRY hglFrustum(GLdouble left,GLdouble right,GLdouble bottom,GLdouble top,GLdouble zNear,GLdouble zFar)
 {
-    if(!pglFrustum)pglFrustum=(typeof(glFrustum)*)dlsym(RTLD_NEXT,"glFrustum");
-
     if(!cfg.bDisabled&&cfg.bZoom)
     {
         top=zNear*tan((50-cfg.iZoom*5)*M_PI/360);
