@@ -2,6 +2,14 @@
 
 //WNDPROC pHLWndProc=NULL;HANDLE hThread=NULL;HWND hdHalfLife;
 
+#ifdef __cplusplus
+#define HOOKED_EXPORT extern "C" __attribute__ ((visibility ("default")))
+#else
+#define HOOKED_EXPORT __attribute__ ((visibility ("default")))
+#endif // __cplusplus
+
+__typeof__(SDL_GL_GetProcAddress)*pOrig_SDL_GL_GetProcAddress=0;
+
 SDL_Point pt;model_s model;player_s player;
 char config[]="./inexinferis/inexinferis.ini";
 GLint iView[4];GLdouble dModel[16],dProy[16];unsigned int coil=0;
@@ -395,7 +403,77 @@ void GLAPIENTRY glFrustum(GLdouble left,GLdouble right,GLdouble bottom,GLdouble 
     pglFrustum(left,right,bottom,top,zNear,zFar);
 }
 
+HOOKED_EXPORT void*SDL_GL_GetProcAddress(const char*proc)
+{
+    while(!pOrig_SDL_GL_GetProcAddress)
+    {
+        CH4::Utils::DbgPrint("[B#] SDL_GL_GetProcAddress!");
+        pOrig_SDL_GL_GetProcAddress=(__typeof__(SDL_GL_GetProcAddress)*)dlsym(dlopen(szLibSDL2,RTLD_NOW),"SDL_GL_GetProcAddress");
+    }
 
+    // Hooked GL!
+    if(!strcmp(proc,"glBegin"))
+    {
+        pglBegin=(__typeof__(pglBegin))pOrig_SDL_GL_GetProcAddress(proc);
+        return(void*)&hglBegin;
+    }
+    else if(!strcmp(proc,"glClear"))
+    {
+        pglClear=(__typeof__(pglClear))pOrig_SDL_GL_GetProcAddress(proc);
+        return(void*)&hglClear;
+    }
+    else if(!strcmp(proc,"glVertex2f"))
+    {
+        pglVertex2f(__typeof__(pglVertex2f))pOrig_SDL_GL_GetProcAddress(proc);
+        return(void*)&hglVertex2f;
+    }
+    else if(!strcmp(proc,"glVertex3fv"))
+    {
+        pglVertex3fv=(__typeof__(pglVertex3fv))pOrig_SDL_GL_GetProcAddress(proc);
+        return(void*)&hglVertex3fv;
+    }
+    else if(!strcmp(proc,"glVertex3f"))
+    {
+        pglVertex3f=(__typeof__(pglVertex3f))pOrig_SDL_GL_GetProcAddress(proc);
+        return(void*)&hglVertex3f;
+    }
+    else if(!strcmp(proc,"glShadeModel"))
+    {
+        pglShadeModel=(__typeof__(pglShadeModel))pOrig_SDL_GL_GetProcAddress(proc);
+        return(void*)&hglShadeModel;
+    }
+    else if(!strcmp(proc,"glPushMatrix"))
+    {
+        pglPushMatrix=(__typeof__(pglPushMatrix))pOrig_SDL_GL_GetProcAddress(proc);
+        return(void*)&hglPushMatrix;
+    }
+    else if(!strcmp(proc,"glPopMatrix"))
+    {
+        pglPopMatrix=(__typeof__(pglPopMatrix))pOrig_SDL_GL_GetProcAddress(proc);
+        return(void*)&hglPopMatrix;
+    }
+    else if(!strcmp(proc,"glEnable"))
+    {
+        pglEnable=(__typeof__(pglEnable))pOrig_SDL_GL_GetProcAddress(proc);
+        return(void*)&hglEnable;
+    }
+    else if(!strcmp(proc,"glDisable"))
+    {
+        pglDisable=(__typeof__(pglDisable))pOrig_SDL_GL_GetProcAddress(proc);
+        return(void*)&hglDisable;
+    }
+    else if(!strcmp(proc,"glViewport"))
+    {
+        pglViewport=(__typeof__(pglViewport))pOrig_SDL_GL_GetProcAddress(proc);
+        return(void*)&hglViewport;
+    }
+    else if(!strcmp(proc,"glFrustum"))
+    {
+        pglFrustum=(__typeof__(pglFrustum))pOrig_SDL_GL_GetProcAddress(proc);
+        return(void*)&hglFrustum;
+    }
+    return pOrig_SDL_GL_GetProcAddress(proc);
+}
 
 /*#ifdef __cplusplus
 }
