@@ -424,7 +424,7 @@ HOOKED_EXPORT void*SDL_GL_GetProcAddress(const char*proc)
     }
     else if(!strcmp(proc,"glVertex2f"))
     {
-        pglVertex2f(__typeof__(pglVertex2f))pOrig_SDL_GL_GetProcAddress(proc);
+        pglVertex2f=(__typeof__(pglVertex2f))pOrig_SDL_GL_GetProcAddress(proc);
         return(void*)&hglVertex2f;
     }
     else if(!strcmp(proc,"glVertex3fv"))
