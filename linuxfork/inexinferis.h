@@ -71,6 +71,20 @@ extern GLboolean bShoot;
 extern "C"
 {
 #endif*/
+extern typeof(glBegin)*pglBegin;
+extern typeof(glClear)*pglClear;
+extern typeof(glVertex2f)*pglVertex2f;
+extern typeof(glVertex3fv)*pglVertex3fv;
+extern typeof(glVertex3f)*pglVertex3f;
+extern typeof(glShadeModel)*pglShadeModel;
+extern typeof(glPushMatrix)*pglPushMatrix;
+extern typeof(glPopMatrix)*pglPopMatrix;
+extern typeof(glEnable)*pglEnable;
+extern typeof(glDisable)*pglDisable;
+extern typeof(glViewport)*pglViewport;
+extern typeof(glFrustum)*pglFrustum;
+
+extern typeof(SDL_PollEvent)*pSDL_PollEvent;
 extern void SaveConfig();
 /*#ifdef __cplusplus
 }
