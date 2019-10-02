@@ -15,22 +15,22 @@ ColorEntry Colors[]=
 
 void FillRGBA(GLfloat x,GLfloat y,GLfloat w,GLfloat h,int r,int g,int b,int a)
 {
-    pglPushMatrix();
+    glPushMatrix();
     glLoadIdentity();
-    pglDisable(GL_TEXTURE_2D);
-    pglEnable(GL_BLEND);
+    glDisable(GL_TEXTURE_2D);
+    glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
     glColor4f((float)r/255.0f,(float)g/255.0f,(float)b/255.0f,(float)a/255.0f);
-    pglBegin(GL_QUADS);
-    pglVertex2f(x,y);
-    pglVertex2f(x+w,y);
-    pglVertex2f(x+w,y+h);
-    pglVertex2f(x,y+h);
+    glBegin(GL_QUADS);
+    glVertex2f(x,y);
+    glVertex2f(x+w,y);
+    glVertex2f(x+w,y+h);
+    glVertex2f(x,y+h);
     glEnd();
-    pglDisable(GL_BLEND);
-    pglEnable(GL_TEXTURE_2D);
+    glDisable(GL_BLEND);
+    glEnable(GL_TEXTURE_2D);
 
-    pglPopMatrix();
+    glPopMatrix();
 }
 
 void DrawRectangle(GLfloat x,GLfloat y,GLfloat w,GLfloat h,int r,int g,int b,int a)
@@ -149,40 +149,40 @@ void DrawBox(GLfloat x,GLfloat y,GLfloat dist)
 {
     GLint mMode;
     glGetIntegerv(GL_MATRIX_MODE,&mMode);
-    pglEnable(GL_POINT_SMOOTH);
-    pglDisable(GL_TEXTURE_2D);
+    glEnable(GL_POINT_SMOOTH);
+    glDisable(GL_TEXTURE_2D);
     glMatrixMode(GL_PROJECTION);
-    pglPushMatrix();
+    glPushMatrix();
     glLoadIdentity();
 
     glMatrixMode(GL_MODELVIEW);
-    pglPushMatrix();
+    glPushMatrix();
     glLoadIdentity();
 
-    pglEnable(GL_BLEND);
+    glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA,GL_ONE);
 
     glLineWidth(4.0f);
     glColor4f(player.fr,player.fg,player.fb,0.6f);
-    pglBegin(GL_CURRENT_BIT|GL_POINT_BIT);
-    pglVertex2f(x-dist*2.5,y+dist*3);
-    pglVertex2f(x-dist*2.5,y+dist*10);
-    pglVertex2f(x+dist*2.5,y+dist*10);
-    pglVertex2f(x+dist*2.5,y+dist*3);
-    pglVertex2f(x-dist*2.5,y+dist*3);
+    glBegin(GL_CURRENT_BIT|GL_POINT_BIT);
+    glVertex2f(x-dist*2.5,y+dist*3);
+    glVertex2f(x-dist*2.5,y+dist*10);
+    glVertex2f(x+dist*2.5,y+dist*10);
+    glVertex2f(x+dist*2.5,y+dist*3);
+    glVertex2f(x-dist*2.5,y+dist*3);
     glEnd();
 
-    pglDisable(GL_BLEND);
+    glDisable(GL_BLEND);
 
     glMatrixMode(GL_PROJECTION);
-    pglPopMatrix();
+    glPopMatrix();
 
     glMatrixMode(GL_MODELVIEW);
-    pglPopMatrix();
+    glPopMatrix();
 
     glMatrixMode(mMode);
 
-    pglEnable(GL_TEXTURE_2D);
-    pglDisable(GL_POINT_SMOOTH);
+    glEnable(GL_TEXTURE_2D);
+    glDisable(GL_POINT_SMOOTH);
 }
 
