@@ -10,6 +10,8 @@
 
 __typeof__(SDL_GL_GetProcAddress)*pOrig_SDL_GL_GetProcAddress=0;
 
+const char szLibSDL2[]="./libSDL2.so";
+
 SDL_Point pt;model_s model;player_s player;
 char config[]="./Inexinferis/Inexinferis.ini";
 GLint iView[4];GLdouble dModel[16],dProy[16];unsigned int coil=0;
@@ -388,7 +390,7 @@ HOOKED_EXPORT void*SDL_GL_GetProcAddress(const char*proc)
 {
     while(!pOrig_SDL_GL_GetProcAddress)
     {
-        CH4::Utils::DbgPrint("[B#] SDL_GL_GetProcAddress!");
+        puts("[B#] SDL_GL_GetProcAddress!");
         pOrig_SDL_GL_GetProcAddress=(__typeof__(SDL_GL_GetProcAddress)*)dlsym(dlopen(szLibSDL2,RTLD_NOW),"SDL_GL_GetProcAddress");
     }
 
