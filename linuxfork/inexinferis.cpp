@@ -11,7 +11,7 @@
 __typeof__(SDL_GL_GetProcAddress)*pOrig_SDL_GL_GetProcAddress=0;
 
 SDL_Point pt;model_s model;player_s player;
-char config[]="./inexinferis/inexinferis.ini";
+char config[]="./Inexinferis/Inexinferis.ini";
 GLint iView[4];GLdouble dModel[16],dProy[16];unsigned int coil=0;
 GLboolean bOnSpeed=0,bKeyAimbot=0,bShoot=0,bHasTarget=0,bSmoke=0,bSky=0,bFlash=0,
 bTex=0,bDrawn=0,modelviewport=0,bLeftButtonDown=0;
